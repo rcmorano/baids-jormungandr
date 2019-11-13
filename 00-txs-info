@@ -1,0 +1,25 @@
+#!/bin/bash
+
+function jormungandr-get-message-logs() {
+
+  jcli rest v0 message logs
+
+}
+
+function jormungandr-get-message-logs-in-json() {
+
+  jcli rest v0 message logs --output-format json
+
+}
+
+function jormungandr-get-txs-sent-from-local() {
+
+  jormungandr-get-message-logs-in-json | jq '.[] | select(.received_from=="Rest")'
+
+}
+
+function jormungandr-get-txs-pending() {
+
+  jormungandr-get-message-logs-in-json | jq '.[] | select(.status=="Pending")'
+
+}
