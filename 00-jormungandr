@@ -1,0 +1,5 @@
+jormungandr-get-latest-tag ()
+{
+    GIT_REPO="git://github.com/input-output-hk/jormungandr.git";
+    git ls-remote --tags ${GIT_REPO} | grep [0-9]$ | awk '{print $NF}' | sed 's|refs/tags/v||g' | sort -V | tail -n1
+}
