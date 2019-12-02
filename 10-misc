@@ -42,7 +42,7 @@ function jormungandr-pk-to-address() {
   then
     DISCRIMINATION="--testing"
   fi
-  echo "Using '${DISCRIMINATION}' discrimination..."
+  echo "Using '${DISCRIMINATION}' discrimination..." 1>&2
   jcli address account $1
 
 }
