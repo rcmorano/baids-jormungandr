@@ -46,3 +46,9 @@ function jormungandr-pk-to-address() {
   jcli address account $1
 
 }
+
+function jomrungandr-get-stats() {
+
+  jcli rest v0 node stats get
+
+}
