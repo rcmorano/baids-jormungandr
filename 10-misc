@@ -47,7 +47,7 @@ function jormungandr-pk-to-address() {
 
 }
 
-function jomrungandr-get-stats() {
+function jormungandr-get-stats() {
 
   jcli rest v0 node stats get
 
