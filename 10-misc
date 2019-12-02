@@ -23,3 +23,26 @@ function jormungandr-get-txs-pending() {
   jormungandr-get-message-logs-in-json | jq '.[] | select(.status=="Pending")'
 
 }
+
+function jormungandr-get-account() {
+
+  jcli rest v0 account get $1
+
+}
+
+function jormungandr-sk-to-pk() {
+
+  echo $1 | jcli key to-public
+
+}
+
+function jormungandr-pk-to-address() {
+
+  if [ -z "$DISCRIMINATION" ]
+  then
+    DISCRIMINATION="--testing"
+  fi
+  echo "Using '${DISCRIMINATION}' discrimination..."
+  jcli address account $1
+
+}
