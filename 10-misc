@@ -52,3 +52,29 @@ function jormungandr-get-stats() {
   jcli rest v0 node stats get
 
 }
+
+# This one is courtesy of: https://github.com/ilap THANKS!
+function jormungandr-get-network-info() {
+
+  if [ -z "$*" ]
+  then
+    echo 'usage: jcr [API commands]
+   - network stats: Network stats
+   - network p2p view [blocks|fragments]: P2P View
+   - network p2p available:
+   - network tip: Tip
+   - network p2p non_public: P2P non public nodes
+   - network p2p quarantined: P2P quarantined nodes
+   - or any API REST subcommands you are familiar with.' >&2
+  else
+    URL="${JORMUNGANDR_RESTAPI_URL:="http://localhost:${API_PORT:-3001}/api"}/v0"
+
+    for i in $*
+    do
+     URL=${URL}"/${i}"
+     shift
+    done
+    curl ${URL} 2>/dev/null  | jq '.'
+  fi
+
+}
